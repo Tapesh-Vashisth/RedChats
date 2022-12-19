@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const signup_1 = __importDefault(require("./user/signup"));
+const login_1 = __importDefault(require("./user/login"));
+const logout_1 = __importDefault(require("./user/logout"));
+const check_1 = __importDefault(require("./user/check"));
+const addFriend_1 = __importDefault(require("./user/addFriend"));
+const findUser_1 = __importDefault(require("./user/findUser"));
+const getRequests_1 = __importDefault(require("./user/getRequests"));
+const AuthenticateController_1 = __importDefault(require("../../../controller/auth/AuthenticateController"));
+const express = require("express");
+const Router = express.Router();
+Router.use("/user/login", login_1.default);
+Router.use("/user/signup", signup_1.default);
+Router.use("/user/logout", logout_1.default);
+Router.use(AuthenticateController_1.default);
+Router.use("/user/check", check_1.default);
+Router.use("/user/addFriend", addFriend_1.default);
+Router.use("/user/findUser", findUser_1.default);
+Router.use("/user/getRequests", getRequests_1.default);
+exports.default = Router;

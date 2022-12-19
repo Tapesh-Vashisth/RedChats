@@ -1,0 +1,45 @@
+.main-container{
+    background-color: rgb(11, 18, 34);
+    min-height: 100vh;
+    padding: 40px 0px;
+}
+
+.log-box{
+    padding: 20px 0px;
+    text-align: center;
+}
+
+.inputsContainer{
+    background-color: rgb(107, 90, 146);
+    padding: 40px;
+}
+
+.inputs{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: left;
+    row-gap: 30px;   
+}
+
+.inputs div{
+    display: grid;
+    row-gap: 5px;
+}
+
+input{
+    border-radius: 8px;
+    width: 100%;
+}
+
+.inputs p{
+    font-weight: bold;
+    text-align: left;
+}
+
+.otherway{
+    width: 60%;
+    color: rgb(131, 116, 116);
+}
+
+
+
