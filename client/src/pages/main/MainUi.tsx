@@ -8,14 +8,14 @@ import {Grid} from "@mui/material";
 import Members from "./Members";
 import { fetchChatRooms, chatActions } from "../../features/chat/chatsSlice";
 
-const MainUi = (props: any) => {
+interface props{
+    view: 0 | 1 | 2
+    toggleVisibility: (to: 0 | 1 | 2) => void
+}
+
+const MainUi = (props: props) => {
     const dispatch = useAppDispatch();
     const chats = useAppSelector((state) => (state.chats));
-    const [view, setView] = useState<0 | 1 | 2> (0);
-    
-    const toggleVisibility = (to: 0 | 1 | 2) => {
-        setView(to);
-    }
     
     useEffect(() => {
         dispatch(fetchChatRooms());
@@ -36,15 +36,15 @@ const MainUi = (props: any) => {
 
     return (
         <Stack direction = "column" style = {{minHeight: "100vh", backgroundColor: "#1e1a29"}}>
-            <Navbar toggleVisibility = {toggleVisibility} />
+            <Navbar toggleVisibility = {props.toggleVisibility} />
             <Grid className = "height" container style = {{flexGrow: 1}} columns = {16} >
-                <Grid item xs = {16} sm = {4} sx = {{display: {xs: view === 0 ? "block" : "none", sm: "block"}}}>
+                <Grid item xs = {16} sm = {4} sx = {{display: {xs: props.view === 0 ? "block" : "none", sm: "block"}}}>
                     <Outlet />
                 </Grid>
-                <Grid item sx = {{display: {xs: view === 1 ? "block" : "none", sm: "block"}}} xs = {16} sm = {8}>
-                    <Chat toggleVisibility={toggleVisibility}/>
+                <Grid item sx = {{display: {xs: props.view === 1 ? "block" : "none", sm: "block"}}} xs = {16} sm = {8}>
+                    <Chat toggleVisibility={props.toggleVisibility}/>
                 </Grid>
-                <Grid item sx = {{display: {xs: view === 2 ? "block" : "none", sm: "block"}}} xs = {16} sm = {4}>
+                <Grid item sx = {{display: {xs: props.view === 2 ? "block" : "none", sm: "block"}}} xs = {16} sm = {4}>
                     <Members />
                 </Grid>
             </Grid>

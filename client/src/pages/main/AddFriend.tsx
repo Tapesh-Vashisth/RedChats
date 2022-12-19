@@ -46,7 +46,7 @@ const AddFriend = () => {
       setAdminRooms(data.adminRooms);
     } catch (err: any) {
       e.target.blur();
-      alert("something went wrong gotcha");
+      alert("something went wrong!");
     }
   }
 
@@ -58,9 +58,9 @@ const AddFriend = () => {
     try {
       const response = await axios.post(baseurl + "chats/createRoom", {username: user.username, chatroom: room, strength: strength}, {withCredentials: true});
       await response.data;
-      alert("let's see");
+      alert("room created!");
     } catch (err: any) {
-      alert("something went wrong");
+      alert("something went wrong!");
     }
   }
 

@@ -3,7 +3,11 @@ import { Stack } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { chatActions } from '../../features/chat/chatsSlice';
 
-const ChatList = () => {
+interface props{
+  toggleVisibility: (to: 0 | 1 | 2) => void
+}
+
+const ChatList = (props: props) => {
   const [height, setHeight] = useState<number>();
   const dispatch = useAppDispatch();
   const chats = useAppSelector((state) => state.chats);
@@ -13,6 +17,7 @@ const ChatList = () => {
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLElement>, clicked: number) => {
+    props.toggleVisibility(1);
     dispatch(chatActions.setCurrent(clicked));
   }
 

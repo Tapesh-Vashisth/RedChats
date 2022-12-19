@@ -38,7 +38,8 @@ app.use((0, cors_1.default)({
 const io = new Server(server, {
     cors: {
         origin: ["http://localhost:3000", "https://redchats.netlify.app"],
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST"],
+        Credential: true
     }
 });
 app.use(express_1.default.json());

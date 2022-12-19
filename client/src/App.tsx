@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Route, Routes, useNavigate} from "react-router-dom";
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
@@ -11,10 +11,15 @@ import Requests from "./pages/main/Requests";
 import AddFriend from "./pages/main/AddFriend";
 
 function App() {
+  const [view, setView] = useState<0 | 1 | 2> (0);
   const user = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  
+  const toggleVisibility = (to: 0 | 1 | 2) => {
+      setView(to);
+  }
+  
   useEffect(() => {
     dispatch(fetchCheckUser());
   }, [dispatch]);
@@ -42,9 +47,9 @@ function App() {
 
   return (
       <Routes>
-        <Route path = "/" element = {<MainUi />} >
-          <Route index element = {<ChatList />} />
-          <Route path = "chats" element = {<ChatList />} />
+        <Route path = "/" element = {<MainUi toggleVisibility={toggleVisibility} view = {view} />} >
+          <Route index element = {<ChatList toggleVisibility={toggleVisibility} />} />
+          <Route path = "chats" element = {<ChatList toggleVisibility={toggleVisibility} />} />
           <Route path = "requests" element = {<Requests />} />
           <Route path = "addFriend" element = {<AddFriend />} />
         </Route>
