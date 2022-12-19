@@ -20,10 +20,12 @@ const initialState: state = {
     error: ""
 }
 
+axios.defaults.withCredentials = true;
+
 const apiReq = baseurl + "auth/user/getRequests";
 export const fetchRequests = createAsyncThunk("fetch/fetchRequests", async (_, {rejectWithValue}) => {
     try {
-        const response = await axios.get(apiReq);
+        const response = await axios.get(apiReq, {withCredentials: true});
         return response.data;
     } catch (err: any) {
         return rejectWithValue(err);

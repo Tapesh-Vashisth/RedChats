@@ -41,7 +41,7 @@ const AddFriend = () => {
 
   const fetchAdminRooms = async (e: React.FocusEvent<HTMLSelectElement>) => {
     try {
-      const response = await axios.post(baseurl + "chats/findAdminRooms", {username: user.username});
+      const response = await axios.post(baseurl + "chats/findAdminRooms", {username: user.username}, {withCredentials: true});
       const data = await response.data;
       setAdminRooms(data.adminRooms);
     } catch (err: any) {
@@ -56,7 +56,7 @@ const AddFriend = () => {
 
   const submitRoomHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
-      const response = await axios.post(baseurl + "chats/createRoom", {username: user.username, chatroom: room, strength: strength});
+      const response = await axios.post(baseurl + "chats/createRoom", {username: user.username, chatroom: room, strength: strength}, {withCredentials: true});
       await response.data;
       alert("let's see");
     } catch (err: any) {
@@ -68,7 +68,7 @@ const AddFriend = () => {
     if (chatid !== "none"){
       try {
         if (user.username !== searched){
-          const response = await axios.post(baseurl + "auth/user/findUser", {username: searched});
+          const response = await axios.post(baseurl + "auth/user/findUser", {username: searched}, {withCredentials: true});
           const users = response.data;
           setFound(true);
           setResult(users.search); 
@@ -87,7 +87,7 @@ const AddFriend = () => {
 
   const addHandler = async (e: React.MouseEvent<HTMLButtonElement>, username: string) => {
     try {
-      await axios.post(baseurl + "auth/user/addFriend", {chatid, to: username, from: user.username});
+      await axios.post(baseurl + "auth/user/addFriend", {chatid, to: username, from: user.username}, {withCredentials: true});
       alert("successfully sent request");
     } catch (err: any) {
       alert("something went wrong");

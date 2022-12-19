@@ -23,6 +23,8 @@ interface state{
     error: any
 };
 
+axios.defaults.withCredentials = true;
+
 const initialState: state = {
     chats: [],
     mapping: new Map <string, boolean> (),
@@ -38,7 +40,7 @@ axios.defaults.withCredentials = true;
 const apiChatRooms = baseurl + "chats/getChatlist";
 export const fetchChatRooms = createAsyncThunk("fetch/fetchChatRooms", async (_, {rejectWithValue}) => {
     try {
-        const response = await axios.get(apiChatRooms);
+        const response = await axios.get(apiChatRooms, {withCredentials: true});
         return response.data;
     } catch (err: any) {
         return rejectWithValue(err);

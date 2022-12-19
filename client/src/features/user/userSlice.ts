@@ -38,7 +38,7 @@ axios.defaults.withCredentials = true;
 const apiIn = BASEURL + "auth/user/login";
 export const fetchInUser = createAsyncThunk("fetch/fetchInUser", async (credentials: credentialsIn, {rejectWithValue}) => {
     try {
-        const response = await axios.post(apiIn, credentials);
+        const response = await axios.post(apiIn, credentials, {withCredentials: true});
         console.log(response.data);
         return response.data;
     } catch (err: any) {
@@ -56,7 +56,7 @@ interface credentialsUp{
 const apiUp = BASEURL + "auth/user/signup";
 export const fetchUpUser = createAsyncThunk("fetch/fetchUpUser", async (credentials: credentialsUp, {rejectWithValue}) => {
     try {
-        const response = await axios.post(apiUp, credentials);
+        const response = await axios.post(apiUp, credentials, {withCredentials: true});
         console.log(response.data);
         return response.data;
     } catch (err: any) {
@@ -67,7 +67,7 @@ export const fetchUpUser = createAsyncThunk("fetch/fetchUpUser", async (credenti
 const apiOut = BASEURL + "auth/user/logout";
 export const fetchOutUser = createAsyncThunk("fetch/fetchOutUser", async (_, {rejectWithValue}) => {
     try {
-        const response = await axios.get(apiOut);
+        const response = await axios.get(apiOut, {withCredentials: true});
         return response.data;
     } catch (err: any) {
         return rejectWithValue(err);
@@ -77,7 +77,7 @@ export const fetchOutUser = createAsyncThunk("fetch/fetchOutUser", async (_, {re
 const apiCheck = BASEURL + "auth/user/check";
 export const fetchCheckUser = createAsyncThunk("fetch/fetchCheckUser", async (_, {rejectWithValue}) => {
     try {
-        const response = await axios.get(apiCheck);
+        const response = await axios.get(apiCheck, {withCredentials: true});
         return response.data;
     } catch (err: any) {
         return rejectWithValue(err);
