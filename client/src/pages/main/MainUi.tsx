@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect} from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import Navbar from "../../components/reusableComponents/Navbar";
 import {Stack} from "@mui/material";
