@@ -98,17 +98,27 @@ io.on("connection", (socket: any) => {
             try {
                 await sender.updateOne({$pull: {Requests: {username: data.to, chatroom: data.chatroom}}});
                 await reciever.updateOne({$pull: {Requests: {username: data.from, chatroom: data.chatroom}}});
-                await reciever.updateOne({$push: {chatRooms: {chatroom: data.chatroom}}});
+                await reciever.updateOne({$push: {chatRooms: {chatroom: data.chatroom}}}); 
 
                 // updating the relation 
                 const relation = await relationModel.findOne({chatroom: data.chatroom});
                 if (relation){
-                    const mem2 = await new memberModel({member: {username: data.to, role: "member"}});
-                    await relation.updateOne({$push: {members: mem2}}); 
-                    await relation.save();
-                    await sender.save();
-                    await reciever.save();
-                    io.emit("SuccessAccepted", data);
+                    if (relation.members.find((x) => {
+                        if (x.member?.username === data.to) {
+                            return true;
+                        }
+
+                        return false;
+                    })) {
+                        ;
+                    } else {
+                        const mem2 = await new memberModel({member: {username: data.to, role: "member"}});
+                        await relation.updateOne({$push: {members: mem2}}); 
+                        await relation.save();
+                        await sender.save();
+                        await reciever.save();
+                        io.emit("SuccessAccepted", data);
+                    }
                 }
             } catch (err) {
                 console.log(err);
